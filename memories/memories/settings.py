@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -65,7 +66,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'social_django.context_processors.backends',
-                'social_django.context_processors.login_redirect', 
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -116,8 +117,8 @@ USE_I18N = True
 USE_TZ = True
 
 AUTHENTICATION_BACKENDS = [
-  'social_core.backends.facebook.FacebookOAuth2',
-  'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
 
@@ -125,7 +126,9 @@ AUTHENTICATION_BACKENDS = [
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "core/static/"),
+]
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
@@ -136,11 +139,11 @@ LOGIN_REDIRECT_URL = 'home'
 LOGOUT_URL = 'logout'
 LOGOUT_REDIRECT_URL = 'login'
 
-SOCIAL_AUTH_FACEBOOK_KEY = 790504048776933 # App ID
-SOCIAL_AUTH_FACEBOOK_SECRET = 'cc27c2f858f9686323c8a0deb5621095' # App Secret
+SOCIAL_AUTH_FACEBOOK_KEY = 790504048776933  # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = 'cc27c2f858f9686323c8a0deb5621095'  # App Secret
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'user_link']
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
-  'fields': 'id, name, email, picture.type(large), link'
+    'fields': 'id, name, email, picture.type(large), link'
 }
 
 SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [

@@ -1,6 +1,37 @@
 {% extends 'base.html' %}
+{% block extend_head %}
+{% load static %}
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript"
+    src="https://rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locationpicker.jquery.js"></script>
+<!-- <script src="{% static 'main.js'%}"></script> -->
+{% endblock %}
 {% block content %}
-<div class="row">
-s
+<div class="container">
+    <div class="row">
+        {% if memory_set %}
+        {% for item in memory_set %}
+        <div class="col-sm-6 col-md-4 mt-4 mb-3">
+            <div class="card">
+                <iframe class="card-img-top"
+                    src="https://maps.google.com/maps?q={{ item.lat }}, {{ item.long }}&z=15&output=embed" width="360"
+                    height="270" frameborder="0"></iframe>
+                <div class="card-body">
+                    <h5 class="card-title">Name: {{ item.name }}</h5>
+                    <p class="card-text">{{ item.comment }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h2 class="text text-center text-danger"> YOU HAVE NO MEMORIES </h2>
+        {% endif %}
+    </div>
+    <div class="row">
+        <div class="col">
+            <a class="btn btn-success mb-2" href="{% url 'create_memory' %}">ADD A MEMORY</a>
+        </div>
+    </div>
 </div>
 {% endblock %}
